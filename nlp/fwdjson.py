@@ -35,9 +35,10 @@ for x in language_variations:
         #i['output']
         #i['instruction']
 
-        translated_input = fwd_translator(i['input'], max_length=1024)
-        translated_output = fwd_translator(i['output'], max_length=1024)
+
         try:
+            translated_input = fwd_translator(i['input'])
+            translated_output = fwd_translator(i['output'])
             translated_input = translated_input[0]['translation_text']
             translated_output = translated_output[0]['translation_text']
         except IndexError:

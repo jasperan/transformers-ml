@@ -26,6 +26,7 @@ language_variations = ['es', 'de']
 for x in language_variations:
     fwd_translator = pipeline(task="translation", model="Helsinki-NLP/opus-mt-{}-{}".format('en', x))
     for i in data_list:
+        print(i)
         assert 'input' in x
         assert 'output' in x
         assert 'instruction' in x

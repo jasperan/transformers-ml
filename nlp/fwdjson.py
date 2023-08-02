@@ -24,7 +24,7 @@ new_translations = list()
 language_variations = ['es', 'de']
 
 for x in language_variations:
-    fwd_translator = pipeline(task="translation", model="Helsinki-NLP/opus-mt-{}-{}".format('en', x))
+    fwd_translator = pipeline(task="translation", model="Helsinki-NLP/opus-mt-{}-{}".format('en', x), max_length=500)
     for i in data_list:
         print(i)
         assert 'input' in i
@@ -35,8 +35,8 @@ for x in language_variations:
         #i['output']
         #i['instruction']
 
-        translated_input = fwd_translator(i['input'])
-        translated_output = fwd_translator(i['output'])
+        translated_input = fwd_translator(i['input'], max_length=1024)
+        translated_output = fwd_translator(i['output'], max_length=1024)
         try:
             translated_input = translated_input[0]['translation_text']
             translated_output = translated_output[0]['translation_text']

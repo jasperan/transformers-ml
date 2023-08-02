@@ -26,12 +26,20 @@ language_variations = ['es', 'de']
 for x in language_variations:
     fwd_translator = pipeline(task="translation", model="Helsinki-NLP/opus-mt-{}-{}".format('en', x))
     for i in data_list:
-        i['input']
-        i['output']
-        i['instruction']
+        
+        #i['input']
+        #i['output']
+        #i['instruction']
 
-        translated_input = fwd_translator(i['input'])[0]['translation_text']
-        translated_output = fwd_translator(i['output'])[0]['translation_text']
+        translated_input = fwd_translator(i['input'])
+        translated_output = fwd_translator(i['output'])
+        try:
+            translated_input = translated_input[0]['translation_text']
+            translated_output = translated_output[0]['translation_text']
+        except IndexError:
+            print('[ERR] {} {}'.format(translated_input, translated_output))
+
+
         print('[INPUT] {}'.format(translated_input))
         print('[OUTPUT] {}'.format(translated_output))
     

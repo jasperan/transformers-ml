@@ -31,10 +31,12 @@ for x in language_variations:
         assert 'output' in i
         assert 'instruction' in i
         
-        #i['input']
-        #i['output']
-        #i['instruction']
-
+        # parse them up until 500 tokens only
+        if len(output) > 500:
+            output = output[:500]
+        
+        if len(input) > 500:
+            input = input[:500]
 
         try:
             translated_input = fwd_translator(i['input'])
@@ -61,11 +63,9 @@ for x in language_variations:
 
 print('New translations: {}'.format(new_translations))
 
-print('[STAT] TT: {} UT: {}'.format(len(new_translations), len(list(set(new_translations)))))
+#print('[STAT] TT: {} UT: {}'.format(len(new_translations), len(list(set(new_translations)))))
+#print('Unique translations: {}'.format(list(set(new_translations))))
 
-print('Unique translations: {}'.format(list(set(new_translations))))
-
-import json
 
 output_file_path = "./new_translations.json"
 

@@ -32,11 +32,11 @@ for x in language_variations:
         assert 'instruction' in i
         
         # parse them up until 500 tokens only
-        if len(output) > 500:
-            output = output[:500]
+        if len(i['output']) > 500:
+            i['output'] = i['output'][:500]
         
-        if len(input) > 500:
-            input = input[:500]
+        if len(i['input']) > 500:
+            i['input'] = i['input'][:500]
 
         try:
             translated_input = fwd_translator(i['input'])
